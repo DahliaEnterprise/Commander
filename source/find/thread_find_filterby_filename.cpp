@@ -86,6 +86,30 @@ bool thread_find_filterby_filename::filenameContainsMatch(QString wildcard, QStr
 
     if(wildcardUsed == true)
     {
+        //Split searchCriteria using wildcard as the delemiter.
+        QStringList searchCriteria_splitby_wildcard = searchCriteria.split(wildcard);
+        int totalSearchCriteriasMatched = 0;
+        QStringList::const_iterator iterator = searchCriteria_splitby_wildcard.constBegin();
+        while(iterator != searchCriteria_splitby_wildcard.constEnd())
+        {
+            QString tag = *iterator;
+            for(int i = 0; i < filename.length(); i++)
+            {
+                QString section_to_compare = filename.mid(i, tag.length());
+                if(section_to_compare.compare(tag) == 0)
+                {
+                    totalSearchCriteriasMatched++;
+                    i = filename.length();
+                }
+            }
+
+            iterator++;
+        }
+        qWarning() << totalSearchCriteriasMatched << " | " << searchCriteria_splitby_wildcard.length();
+        if(totalSearchCriteriasMatched == searchCriteria_splitby_wildcard.length())
+        {
+            matchFound = true;
+        }
 
     }else if(wildcardUsed == false)
     {
@@ -100,3 +124,4 @@ bool thread_find_filterby_filename::filenameContainsMatch(QString wildcard, QStr
 qint32 thread_find_filterby_filename::get_totalFilesSearched(){ return totalFilesSearched; }
 qint32 thread_find_filterby_filename::get_totalFilesToSearch(){ return totalFilesToSearch; }
 QStringList thread_find_filterby_filename::get_searchResultList(){ return searchResultList; }
+int thread_find_filterby_filename::get_currentStatus(){ return currentStatus; }

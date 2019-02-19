@@ -7,11 +7,14 @@ find_filterby_filename::find_filterby_filename(QWidget *parent) : QWidget(parent
 
 void find_filterby_filename::start(QString wildcard, QString searchCriteria, QString directoriesToSearch)
 {
+    this->setWindowTitle("Determining amount of files to search");
+
     layout = new QBoxLayout(QBoxLayout::TopToBottom, nullptr);
     this->setLayout(layout);
 
     progressBar = new QProgressBar();
     progressBar->setRange(0, 100);
+    progressBar->setStyleSheet(QString("QProgressBar:horizontal{ padding:10px; } "));
     layout->addWidget(progressBar);
 
     listWidget = new QListWidget();
@@ -31,7 +34,6 @@ void find_filterby_filename::start(QString wildcard, QString searchCriteria, QSt
 
 void find_filterby_filename::slotFinished()
 {
-    qWarning() << "finished";
     QStringList searchResultList = thread_findFilterByFilename->get_searchResultList();
     for(int i = 0; i < searchResultList.length(); i++)
     {
@@ -39,6 +41,7 @@ void find_filterby_filename::slotFinished()
         newItem->setText(searchResultList.at(i));
         listWidget->addItem(newItem);
     }
+    this->setWindowTitle("Result of Searching");
 
     progressBar->hide();
 }
@@ -51,6 +54,17 @@ void find_filterby_filename::slotFindStatus_timeout()
     double progress_percentage = progress_raw * 100;
     int progress_percentage_as_int = (int)progress_percentage;
     progressBar->setValue(progress_percentage_as_int);
+
+    if(thread_findFilterByFilename->get_currentStatus() == 1)
+    {
+        this->setWindowTitle("Gathering Files");
+    }else if(thread_findFilterByFilename->get_currentStatus() == 2)
+    {
+        this->setWindowTitle("Filtering Files");
+    }else if(thread_findFilterByFilename->get_currentStatus() == 3)
+    {
+        this->setWindowTitle("Results Produced From Search");
+    }
 }
 
 void find_filterby_filename::slotShowInFileManager()
@@ -59,5 +73,4 @@ void find_filterby_filename::slotShowInFileManager()
     QListWidgetItem* item = selectedItems.at(0);
     QProcess* process = new QProcess(nullptr);
     process->startDetached(QString("xdg-open %1").arg(item->text()));
-    //item->text();
 }

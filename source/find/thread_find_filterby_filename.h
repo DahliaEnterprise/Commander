@@ -18,6 +18,7 @@ public:
     qint32 get_totalFilesSearched();
     qint32 get_totalFilesToSearch();
     QStringList get_searchResultList();
+    int get_currentStatus();
 
 private:
     QString wildcard;

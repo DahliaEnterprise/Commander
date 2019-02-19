@@ -18,6 +18,9 @@ public:
 private:
     //Layout
     QBoxLayout* layout;
+    QLabel* creator_image;
+
+    QBoxLayout* panel_of_buttons_layout;
     QPushButton* button_find;
 
     //Applications
