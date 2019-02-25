@@ -7,7 +7,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include "find.h"
-
+#include "cardgame/cardgame.h"
 class mainmenu : public QWidget
 {
     Q_OBJECT
@@ -22,9 +22,12 @@ private:
 
     QBoxLayout* panel_of_buttons_layout;
     QPushButton* button_find;
+    QPushButton* button_cardgame;
 
     //Applications
     class find* gui_find;
+    cardgame* gui_cardgame;
+
 
 signals:
 
@@ -32,6 +35,7 @@ public slots:
 
 private slots:
     void show_find_window();
+    void show_cardgame_window();
 };
 
 #endif // MAINMENU_H

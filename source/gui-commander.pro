@@ -29,13 +29,26 @@ SOURCES += \
     mainmenu.cpp \
     find.cpp \
     find/find_filterby_filename.cpp \
-    find/thread_find_filterby_filename.cpp
+    find/thread_find_filterby_filename.cpp \
+    cardgame/cardgame.cpp \
+    cardgame/window_playagainstai.cpp \
+    cardgame/opengl/opengl_widget.cpp \
+    cardgame/opengl/opengl_canvas.cpp \
+    cardgame/game_to_opengl/game_to_opengl_image.cpp \
+    cardgame/game_to_opengl/game_to_opengl.cpp
 
 HEADERS += \
     mainmenu.h \
     find.h \
     find/find_filterby_filename.h \
-    find/thread_find_filterby_filename.h
+    find/thread_find_filterby_filename.h \
+    cardgame/cardgame.h \
+    cardgame/window_playagainstai.h \
+    cardgame/opengl/opengl_widget.h \
+    cardgame/opengl/opengl_canvas.h \
+    cardgame/opengl/canvas/canvas_draw_command_image.h \
+    cardgame/game_to_opengl/game_to_opengl_image.h \
+    cardgame/game_to_opengl/game_to_opengl.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -10,6 +10,9 @@
 #include "opengl/opengl_widget.h"
 #include "opengl/opengl_canvas.h"
 #include <QTimer>
+#include "game_to_opengl/game_to_opengl.h"
+#include "game_to_opengl/game_to_opengl_image.h"
+#include <QList>
 class window_playAgainstAI : public QWidget
 {
     Q_OBJECT
@@ -23,7 +26,9 @@ private:
     QTimer* update_trigger;
 
     QBoxLayout* layout;
-    QLabel* actioncard_top;
+
+    QList<game_to_opengl*> game_to_opengl_draw_list;
+
 
 signals:
 

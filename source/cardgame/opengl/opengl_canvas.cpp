@@ -5,22 +5,33 @@ opengl_canvas::opengl_canvas()
 
 }
 
+void opengl_canvas::initialize()
+{
+    ObjectsToSustainOnScreen = QList<game_to_opengl*>();
+}
+
 
 void opengl_canvas::paint(QPainter *painter, QPaintEvent *event, qint64 milisecondsSinceLastPaint)
 {
-    //Probubly need to make it so paint will sustain "committed" arrangements, while it takes input somehow of the objects to sustain.
-    QImage image(QString(":/resources/cards/card-creature-dragon.png"));
-    painter->drawImage(200, 600, image);
+    //Loop through "Objects To Sustain On Screen". Begining of list is the back most layer, end is the front most layer.
+    QList<game_to_opengl*>::const_iterator objects_iterator = ObjectsToSustainOnScreen.constBegin();
+    while(objects_iterator != ObjectsToSustainOnScreen.constEnd())
+    {
+        game_to_opengl* draw_command_container = *objects_iterator;
+        draw_command_container->paint(painter);
 
-    /**
-    QPen pen = painter->pen();
-    pen.setColor(QColor(100,100,100));
-    pen.setStyle(Qt::DotLine);
-    painter->setPen(pen);
-    painter->drawRect(QRect(0,0, 100, 100));
+        objects_iterator++;
+    }
+}
 
-    pen.setStyle(Qt::DashLine);
-    painter->setPen(pen);
-    painter->drawRect(QRect(0,0,100,100));
-    **/
+void opengl_canvas::sustain_image(QList<game_to_opengl*> setObjectsToSustainOnScreen)
+{
+    ObjectsToSustainOnScreen.clear();
+    QList<game_to_opengl*>::const_iterator iterator = setObjectsToSustainOnScreen.constBegin();
+    while(iterator != setObjectsToSustainOnScreen.constEnd())
+    {
+        game_to_opengl* draw_command_container = *iterator;
+        ObjectsToSustainOnScreen.append(draw_command_container);
+        iterator++;
+    }
 }

@@ -18,6 +18,7 @@ void opengl_widget::initalizeWidget()
     this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     this->setAttribute(Qt::WA_NoSystemBackground, true);
     this->setAttribute(Qt::WA_TranslucentBackground, true);
+    this->setAttribute(Qt::WA_AlwaysStackOnTop);
 }
 
 void opengl_widget::paintEvent(QPaintEvent* event)
@@ -30,7 +31,7 @@ void opengl_widget::paintEvent(QPaintEvent* event)
     qint64 timeSinceLastPaintEvent_int64 = QDateTime::currentMSecsSinceEpoch() - timestampLastPaintEvent;
     canvas->paint(&painter, event, timeSinceLastPaintEvent_int64);
     //Clear resources
-    //Called by destructor: painter.end();
+    painter.end();
 }
 
 void opengl_widget::slotUpdate()

@@ -2,4 +2,8 @@
     <qresource prefix="/resources">
         <file alias="creator.jpg">resources/creator.jpg</file>
     </qresource>
+    <qresource prefix="/resources/cards">
+        <file alias="card-creature-dragon.png">resources/cards/card-creature-dragon.png</file>
+        <file alias="activated-card-base-attack.png">resources/cards/activated-card-base-attack-melee.png</file>
+    </qresource>
 </RCC>
