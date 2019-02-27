@@ -14,7 +14,7 @@ public:
     opengl_canvas();
     void initialize();
     void sustain_image(QList<game_to_opengl*> setObjectsToSustainOnScreen);
-    void paint(QPainter *painter, QPaintEvent *event, qint64 milisecondsSinceLastPaint);
+    void paint(QPainter *painter, QPaintEvent *event);
 
 private:
     QStringList objectsToSustainOnScreen;

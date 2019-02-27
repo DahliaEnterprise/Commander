@@ -7,10 +7,6 @@ cardgame::cardgame(QWidget *parent) : QWidget(parent)
 
 void cardgame::start()
 {
-    /** Initalize Objects **/
-    playAgainstAI = new window_playAgainstAI();
-    playAgainstAI->start();
-
     /** Define Layout **/
     this->setFixedSize(450, 200);
     layout = new QBoxLayout(QBoxLayout::TopToBottom, nullptr);
@@ -30,11 +26,13 @@ void cardgame::start()
     layout->addWidget(button_playAgainstHuman);
 
     QObject::connect(button_playAgainstAI, SIGNAL(clicked()), this, SLOT(show_playAgainstAI()));
-
 }
 
 void cardgame::show_playAgainstAI()
 {
     this->hide();
+    playAgainstAI = new window_playAgainstAI();
+    playAgainstAI->start();
     playAgainstAI->show();
+
 }

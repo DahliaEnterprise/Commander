@@ -3,23 +3,27 @@
 
 #include <QObject>
 #include <QPainter>
+#include <QTimer>
 
 class game_to_opengl_image : public QObject
 {
     Q_OBJECT
 public:
     explicit game_to_opengl_image(QObject *parent = nullptr);
-    void setup(QString filename, int x, int y, int width, int height, int scale);
+    void setup(QString setfilename, int setx, int sety, int setwidth, int setheight, int setscale);
+    void setup(QPixmap image,int setx, int sety, int setwidth, int setheight, int setscale);
+    void updateCoordinates(double x, double y);
     void paint(QPainter* paint);
 
 private:
     QString filename;
-    int x;
-    int y;
+    double x;
+    double y;
     int width;
     int height;
     int scale;
     QImage image;
+    QTimer* tempTimer;
 
 signals:
 

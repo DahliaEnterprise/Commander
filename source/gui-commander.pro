@@ -35,7 +35,12 @@ SOURCES += \
     cardgame/opengl/opengl_widget.cpp \
     cardgame/opengl/opengl_canvas.cpp \
     cardgame/game_to_opengl/game_to_opengl_image.cpp \
-    cardgame/game_to_opengl/game_to_opengl.cpp
+    cardgame/game_to_opengl/game_to_opengl.cpp \
+    cardgame/playerInput/playerinput_usingkeyboard.cpp \
+    cardgame/gamelogic/gamelogic.cpp \
+    cardgame/gamelogic/mainmenu/gamelogic_mainmenu.cpp \
+    cardgame/gamelogic/mainmenu/mainmenu_indicator_of_selectedwindow.cpp \
+    cardgame/gamelogic/mainmenu/mainmenu_mouse.cpp
 
 HEADERS += \
     mainmenu.h \
@@ -48,7 +53,12 @@ HEADERS += \
     cardgame/opengl/opengl_canvas.h \
     cardgame/opengl/canvas/canvas_draw_command_image.h \
     cardgame/game_to_opengl/game_to_opengl_image.h \
-    cardgame/game_to_opengl/game_to_opengl.h
+    cardgame/game_to_opengl/game_to_opengl.h \
+    cardgame/playerInput/playerinput_usingkeyboard.h \
+    cardgame/gamelogic/gamelogic.h \
+    cardgame/gamelogic/mainmenu/gamelogic_mainmenu.h \
+    cardgame/gamelogic/mainmenu/mainmenu_indicator_of_selectedwindow.h \
+    cardgame/gamelogic/mainmenu/mainmenu_mouse.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

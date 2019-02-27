@@ -16,18 +16,17 @@ class opengl_widget : public QOpenGLWidget
 public:
     opengl_widget(opengl_canvas* setCanvas);
     void initalizeWidget();
+    void gpu_update();
 
 private:
-    qint64 timestampLastPaintEvent;
-
     //Global Scope
     opengl_canvas* canvas;
 
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void close(QCloseEvent* event);
 
 public slots:
-    void slotUpdate();
 };
 
 #endif // OPENGL_WIDGET_H

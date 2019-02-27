@@ -30,7 +30,7 @@ private:
 
 signals:
 
-public slots:
+private slots:
     void show_playAgainstAI();
 };
 
