@@ -15,6 +15,7 @@ class database : public QObject
 public:
     explicit database(QObject *parent = nullptr);
     void start();
+    QList<database_card*> get_turnActivatedCardList();
 
 private:
     QFile* cardsdb;

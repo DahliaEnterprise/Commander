@@ -19,9 +19,7 @@
     <qresource prefix="/resources/mainmenu/cardcreation/mouse">
         <file alias="mouse-pointer.png">resources/mainmenu/mouse/mouse-pointer.png</file>
     </qresource>
-    <qresource prefix="/resources/db">
-        <file alias="database.txt">resources/db/database.txt</file>
-    </qresource>
+    <qresource prefix="/resources/db"/>
     <qresource prefix="/resources/db/cards">
         <file alias="cardsmanifest.txt">resources/db/cards/cardsmanifest.txt</file>
         <file alias="beastman.txt">resources/db/cards/beastman.txt</file>

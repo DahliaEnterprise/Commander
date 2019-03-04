@@ -22,7 +22,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-CONFIG += c++11
+CONFIG += c++11 wall_off
 
 SOURCES += \
         main.cpp \
@@ -43,7 +43,8 @@ SOURCES += \
     cardgame/gamelogic/mainmenu/mainmenu_mouse.cpp \
     cardgame/gamelogic/mainmenu/mainmenu_selectablecards.cpp \
     cardgame/database/database.cpp \
-    cardgame/database/database_card.cpp
+    cardgame/database/database_card.cpp \
+    cardgame/gamelogic/mainmenu/mainmenu_loadinggizmo.cpp
 
 HEADERS += \
     mainmenu.h \
@@ -64,7 +65,8 @@ HEADERS += \
     cardgame/gamelogic/mainmenu/mainmenu_mouse.h \
     cardgame/gamelogic/mainmenu/mainmenu_selectablecards.h \
     cardgame/database/database.h \
-    cardgame/database/database_card.h
+    cardgame/database/database_card.h \
+    cardgame/gamelogic/mainmenu/mainmenu_loadinggizmo.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

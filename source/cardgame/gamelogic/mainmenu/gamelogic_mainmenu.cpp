@@ -43,9 +43,13 @@ void gamelogic_mainmenu::render(QPoint mousePosition, QList<game_to_opengl*>& li
         list.append(indicator_of_selectedwindow->game_to_opengl_object());
 
         //Display selectable cards
+        selectablecards->start();
         list.append(selectablecards->game_to_opengl_object());
 
         //Mouse pointer
         mousePointer->update(mousePosition);
         list.append(mousePointer->game_to_opengl_object());
+
+        //Loading Screen
+
 }

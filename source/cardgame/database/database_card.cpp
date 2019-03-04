@@ -44,3 +44,14 @@ QImage database_card::get_image()
     }
     return cardImage;
 }
+
+void database_card::load_image()
+{
+    if(cardImageIsSet == false)
+    {
+        cardImage = QImage(image);
+        cardImageIsSet = true;
+    }
+}
+
+bool database_card::imageLoaded(){ return cardImageIsSet; }

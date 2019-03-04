@@ -12,6 +12,8 @@ public:
     explicit database_card(QObject *parent = nullptr);
     void loadCardInformation(QByteArray cardInformation);
     QImage get_image();
+    void load_image();
+    bool imageLoaded();
 
 private:
     QString name;

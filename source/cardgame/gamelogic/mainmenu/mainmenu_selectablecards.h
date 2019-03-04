@@ -7,6 +7,9 @@
 #include <QDebug>
 #include <QImage>
 #include "cardgame/database/database.h"
+#include "cardgame/database/database_card.h"
+#include <QList>
+
 class mainmenu_selectablecards : public QObject
 {
     Q_OBJECT
@@ -20,6 +23,8 @@ private:
     game_to_opengl* selectable_cards_container;
     game_to_opengl_image* selectable_cards_image;
     QImage image;
+    QTimer* managerTimer;
+
 
     //Global scope
     database* db;
@@ -27,6 +32,7 @@ private:
 signals:
 
 public slots:
+    void slotManager();
 
 };
 
