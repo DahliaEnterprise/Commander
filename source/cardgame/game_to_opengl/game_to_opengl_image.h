@@ -12,8 +12,11 @@ public:
     explicit game_to_opengl_image(QObject *parent = nullptr);
     void setup(QString setfilename, int setx, int sety, int setwidth, int setheight, int setscale);
     void setup(QPixmap image,int setx, int sety, int setwidth, int setheight, int setscale);
+    void resetPixmap(QPixmap setpixmap);
     void updateCoordinates(double x, double y);
+    void show(bool state);
     void paint(QPainter* paint);
+    QRect get_bounding_box();
 
 private:
     QString filename;
@@ -22,6 +25,8 @@ private:
     int width;
     int height;
     int scale;
+    QPixmap pixmap;
+    QPixmap blankPixmap;
     QImage image;
     QTimer* tempTimer;
 

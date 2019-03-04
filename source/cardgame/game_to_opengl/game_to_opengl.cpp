@@ -19,3 +19,5 @@ void game_to_opengl::paint(QPainter* painter)
         image->paint(painter);
     }
 }
+
+QRect game_to_opengl::get_bounding_box(){ return image->get_bounding_box(); }

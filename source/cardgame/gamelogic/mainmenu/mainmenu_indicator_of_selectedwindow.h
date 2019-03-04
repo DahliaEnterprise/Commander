@@ -24,8 +24,16 @@ private:
     game_to_opengl* mouse_container;
     game_to_opengl_image* mouse_image;
 
-    game_to_opengl* indicator_container;
-    game_to_opengl_image* indicator_image;
+    game_to_opengl* currently_selected_deck_container;
+    game_to_opengl_image* currently_selected_deck_image;
+
+    game_to_opengl* selectable_cards_container;
+    game_to_opengl_image* selectable_cards_image;
+
+    game_to_opengl* blank_container;
+    game_to_opengl_image* blank_image;
+
+    int currentSelectedWindow;
 
 signals:
 

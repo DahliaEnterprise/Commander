@@ -1,0 +1,11 @@
+name:"beastman"
+type:"human and hooved"
+image:"beastman.png"
+fight:20
+focus:20
+agility:0
+topspeed:1
+moduspraeceptum:if sleep points are reduced from beastman add 1 fight point to beastman
+moduspraeceptum:if fight points are below 5 add 5 to agility
+moduspraeceptum:if fight points are reduced add one point to topspeed forevery fight point lost
+moduspraeceptum:every instance a turnactivatedcard is activated apply 1 fight point

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui concurrent
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -40,7 +40,10 @@ SOURCES += \
     cardgame/gamelogic/gamelogic.cpp \
     cardgame/gamelogic/mainmenu/gamelogic_mainmenu.cpp \
     cardgame/gamelogic/mainmenu/mainmenu_indicator_of_selectedwindow.cpp \
-    cardgame/gamelogic/mainmenu/mainmenu_mouse.cpp
+    cardgame/gamelogic/mainmenu/mainmenu_mouse.cpp \
+    cardgame/gamelogic/mainmenu/mainmenu_selectablecards.cpp \
+    cardgame/database/database.cpp \
+    cardgame/database/database_card.cpp
 
 HEADERS += \
     mainmenu.h \
@@ -58,7 +61,10 @@ HEADERS += \
     cardgame/gamelogic/gamelogic.h \
     cardgame/gamelogic/mainmenu/gamelogic_mainmenu.h \
     cardgame/gamelogic/mainmenu/mainmenu_indicator_of_selectedwindow.h \
-    cardgame/gamelogic/mainmenu/mainmenu_mouse.h
+    cardgame/gamelogic/mainmenu/mainmenu_mouse.h \
+    cardgame/gamelogic/mainmenu/mainmenu_selectablecards.h \
+    cardgame/database/database.h \
+    cardgame/database/database_card.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

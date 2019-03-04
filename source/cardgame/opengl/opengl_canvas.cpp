@@ -19,6 +19,7 @@ void opengl_canvas::paint(QPainter *painter, QPaintEvent *event)
     {
         game_to_opengl* draw_command_container = *objects_iterator;
         draw_command_container->paint(painter);
+
         objects_iterator++;
     }
 }
@@ -26,15 +27,4 @@ void opengl_canvas::paint(QPainter *painter, QPaintEvent *event)
 void opengl_canvas::sustain_image(QList<game_to_opengl*> setObjectsToSustainOnScreen)
 {
     ObjectsToSustainOnScreen.clear(); ObjectsToSustainOnScreen = setObjectsToSustainOnScreen;
-
-    /**
-    ObjectsToSustainOnScreen.clear();
-    QList<game_to_opengl*>::const_iterator iterator = setObjectsToSustainOnScreen.constBegin();
-    while(iterator != setObjectsToSustainOnScreen.constEnd())
-    {
-        game_to_opengl* draw_command_container = *iterator;
-        ObjectsToSustainOnScreen.append(draw_command_container);
-        iterator++;
-    }
-    **/
 }

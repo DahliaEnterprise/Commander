@@ -12,6 +12,7 @@ public:
     explicit game_to_opengl(QObject *parent = nullptr);
     void containImage(game_to_opengl_image* setImage);
     void paint(QPainter* painter);
+    QRect get_bounding_box();
 
 private:
     int datatype;//0=not set; 1 = image;

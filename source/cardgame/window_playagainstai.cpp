@@ -15,7 +15,13 @@ window_playAgainstAI::~window_playAgainstAI()
 
 void window_playAgainstAI::start()
 {
-    QApplication::setOverrideCursor(Qt::BlankCursor);
+    thread_db = new QThread();
+    db = new database();
+    db->moveToThread(thread_db);
+    thread_db->start();
+    db->start();
+
+    //QApplication::setOverrideCursor(Qt::BlankCursor);
 
     timestamp_since_last_logic_cycle = QDateTime::currentMSecsSinceEpoch();
 
@@ -39,7 +45,7 @@ void window_playAgainstAI::start()
     openglWidget->initalizeWidget();
     openglWidget->setFixedSize(screen_width, screen_height);
     openglWidget->setStyleSheet(QString("QOpenGLWidget{ margin:0;padding:0; }"));
-    logic = new gamelogic(canvas, nullptr);
+    logic = new gamelogic(db, canvas, nullptr);
     logic->start();
 
     /** Configure Window (Likely to be move to open gl widget canvas though **/
@@ -56,57 +62,12 @@ void window_playAgainstAI::start()
     //Start GPU update cycle
     update_gpu_trigger = new QTimer();
     QObject::connect(update_gpu_trigger, SIGNAL(timeout()), this, SLOT(slotUpdate()));
-    update_gpu_trigger->start(1);
+    update_gpu_trigger->start(2);
 
-
-    /** DEPRECATED TO BE MOVED TO gamelogic class,
-    game_to_opengl_draw_list = QList<game_to_opengl*>();
-
-    //Background image
-    game_to_opengl_image* bgimage = new game_to_opengl_image();
-    bgimage->setup(QString(":/resources/background.png"), 0, 0, 1920, 1080, 1);
-    game_to_opengl* bgimage_opengl_container = new game_to_opengl();
-    bgimage_opengl_container->containImage(bgimage);
-    game_to_opengl_draw_list.append(bgimage_opengl_container);
-
-    //Image one
-    game_to_opengl_image* imageone = new game_to_opengl_image();
-    imageone->setup(QString(":/resources/cards/card-creature-dragon.png"), 0, 800, 500, 288, 1);
-    game_to_opengl* imageone_opengl_container = new game_to_opengl();
-    imageone_opengl_container->containImage(imageone);
-    game_to_opengl_draw_list.append(imageone_opengl_container);
-
-    //Image two
-    game_to_opengl_image* imagetwo = new game_to_opengl_image();
-    imagetwo->setup(QString(":/resources/cards/activated-card-base-attack.png"), 280, 200, 100, 188, 1);
-    game_to_opengl* imagetwo_opengl_container = new game_to_opengl();
-    imagetwo_opengl_container->containImage(imagetwo);
-    game_to_opengl_draw_list.append(imagetwo_opengl_container);
-
-    //Image Three
-    game_to_opengl_image* imagethree = new game_to_opengl_image();
-    imagethree->setup(QString(":/resources/cards/card-creature-beastman.png"), 1400, 800, 500, 288, 1);
-    game_to_opengl* imagethree_opengl_container = new game_to_opengl();
-    imagethree_opengl_container->containImage(imagethree);
-    game_to_opengl_draw_list.append(imagethree_opengl_container);
-
-    //Image "Keyboard Button Q"
-    game_to_opengl_image* keyboard_button_q = new game_to_opengl_image();
-    keyboard_button_q->setup(QString(":/resources/keyboard buttons/q button.png"), 200, 250, 50, 50, 1);
-    game_to_opengl* keyboard_button_q_opengl_container = new game_to_opengl();
-    keyboard_button_q_opengl_container->containImage(keyboard_button_q);
-    game_to_opengl_draw_list.append(keyboard_button_q_opengl_container);
-
-    //Image "activated card"
-    game_to_opengl_image* imagefour = new game_to_opengl_image();
-    imagefour->setup(QString(":/resources/cards/activated-card-base-attack.png"), 170, 350, 100, 188, 1);
-    game_to_opengl* imagefour_opengl_container = new game_to_opengl();
-    imagefour_opengl_container->containImage(imagefour);
-    game_to_opengl_draw_list.append(imagefour_opengl_container);
-
-
-    canvas->sustain_image(game_to_opengl_draw_list);
-    **/
+    //Start mouse update cycle
+    update_mouse_trigger = new QTimer();
+    QObject::connect(update_mouse_trigger, SIGNAL(timeout()), this, SLOT(slotMousePositionUpdate()));
+    update_mouse_trigger->start(10);
 }
 
 //Relay key press and releases to the player input using keyboard class
@@ -114,6 +75,7 @@ void window_playAgainstAI::keyPressEvent(QKeyEvent* event){
     if(event->key() == Qt::Key_Escape){ slotUserRequestingToCloseApplication(); }
     keyboardInput->key_event(event);
 }
+
 void window_playAgainstAI::keyReleaseEvent(QKeyEvent *event){ keyboardInput->key_event(event); }
 
 //User Requesting to Close Card Game
@@ -125,12 +87,18 @@ void window_playAgainstAI::slotUserRequestingToCloseApplication()
 //System is requesting another frame to be rendered
 void window_playAgainstAI::slotUpdate()
 {
-    mouse_position = QCursor::pos();
     qint64 timesince = QDateTime::currentMSecsSinceEpoch() - timestamp_since_last_logic_cycle;
-    if(timesince >= 2)
+    if(timesince >= 10)
     {
         timestamp_since_last_logic_cycle = QDateTime::currentMSecsSinceEpoch();
         logic->game_update(mouse_position);
     }
     openglWidget->gpu_update();
 }
+
+//Update mouse position
+void window_playAgainstAI::slotMousePositionUpdate()
+{
+    mouse_position = QCursor::pos();
+}
+

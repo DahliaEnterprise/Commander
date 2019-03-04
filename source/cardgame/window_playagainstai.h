@@ -15,6 +15,9 @@
 #include <QList>
 #include "playerInput/playerinput_usingkeyboard.h"
 #include "cardgame/gamelogic/gamelogic.h"
+#include <QGraphicsBlurEffect>
+#include "database/database.h"
+#include <QThread>
 class window_playAgainstAI : public QWidget
 {
     Q_OBJECT
@@ -28,9 +31,12 @@ private:
     opengl_widget* openglWidget;
     opengl_canvas* canvas;
     QTimer* update_gpu_trigger;
+    QTimer* update_mouse_trigger;
 
     QBoxLayout* layout;
 
+    QThread* thread_db;
+    database* db;
     playerInput_usingKeyboard* keyboardInput;
     gamelogic* logic;
     qint64 timestamp_since_last_logic_cycle;
@@ -47,6 +53,7 @@ public slots:
 
 private slots:
     void slotUpdate();
+    void slotMousePositionUpdate();
 
 };
 
